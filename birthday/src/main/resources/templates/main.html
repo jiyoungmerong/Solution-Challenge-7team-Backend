@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<style>
+    @font-face {
+        font-family: 'IM_Hyemin-Bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    *{
+        font-family: 'IM_Hyemin-Bold', sans-serif;
+    }
+    .nav{
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1000px;
+        margin:auto;
+    }
+    .nav .nav_but a{
+        text-decoration: none;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: black;
+    }
+
+    .header{
+        background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRCz4K%2Fbtr24jhMXaN%2FRP5Hcc6qNwVdjMJIHQjgx0%2Fimg.png");
+        background-size: cover;
+        height: 700px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    .header .title{
+        text-align: center;
+    }
+    .header .title h1{
+        font-size:40px;
+        color: 	#eb9189;
+        letter-spacing: 0.2em;
+        margin-bottom: 5px;
+    }
+    .header .title p{
+        margin-top: 0;
+        margin-bottom: 50px;
+        color: 	white;
+        font-size: 20px;
+    }
+    .header .title button{
+        background: #FFE4E1;
+        color: 	#FA8072;
+        border: 2px solid white;
+        border-radius: 5px;
+        padding : 10px 30px;
+        font-size: 14px;
+        transition: .5s ease;
+    }
+    .header .title button:hover{
+        transition: .5s ease;
+        border:2px solid black;
+        background: transparent;
+        color: black;
+    }
+
+    .intro{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 1400px;
+        margin:auto;
+    }
+
+    .intro .card{
+        flex: 1;
+        text-align: center;
+        margin: 100px 40px;
+    }
+
+    .intro .card i{
+        font-size:70px;
+        color: #444;
+        margin-bottom: 30px;
+    }
+    .intro .card h1{
+        letter-spacing: 0.2em;
+    }
+    .intro .card p{
+        font-size: 10px;
+    }
+
+    footer{
+        color: white;
+        background: black;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    footer .container{
+        max-width: 1000px;
+        margin:auto;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    footer .container .left{
+        flex: 1;
+    }
+
+    footer .container .left h1{
+        margin: 0;
+    }
+
+    footer .container .left p{
+        margin: 0;
+        font-size: 10px;
+    }
+
+    footer .container .left .sns{
+        margin-top: 30px;
+    }
+
+    footer .container .left .sns i{
+        font-size: 24px;
+        margin-right: 20px;
+    }
+
+    footer .container .right{
+        flex: 3;
+        padding-left: 50px;
+    }
+
+    footer .container .right{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    footer .container .right .list{
+        flex: 1;
+        margin-left: 20px;
+    }
+
+    footer .container .right .list h2{
+        padding-left: 5px;
+        padding-right: 5px;
+        margin: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid white;
+    }
+    footer .container .right .list ul{
+        list-style: none;
+        padding:0;
+    }
+
+    footer .container .right .list ul li{
+        padding: 5px 5px;
+    }
+
+    footer .container .right .list ul li:hover{
+        background: #222;
+    }
+
+    footer .copy_right{
+        text-align: center;
+    }
+
+    footer .copy_right p{
+        font-size: 10px;
+        margin: 0;
+    }
+</style>
+<body>
+
+<div class = "nav">
+    <div class = "logo"></div>
+<div class = "nav_but">
+    <a href="login.html">로그인</a>
+    <a href="join.html">회원가입</a>
+    <a href="message_list.html">전체 메세지</a>
+</div>
+</div>
+
+<section class="header">
+    <div class="title">
+        <h1>우리집 부대장님</h1>
+        <p>생일이에요</p>
+        <button onclick="location.href='message.html'">생일축하 메세지 보내기</button>
+    </div>
+</section>
+
+<section class = "intro">
+    <div class="card">
+        <i class = "fab fa-css3-alt"></i>
+        <img src="/static/images/엄마.jpg" alt="엄마"  width="150" height="150">
+        <h1><strong>어무니</strong></h1>
+        <p style="font-size: 16px">1970.03.26</p>
+    </div>
+    <div class="card">
+        <i class = "fab fa-css3-alt"></i>
+        <img src="/static/images/아빠.jpg" alt="아빠"  width="150" height="150">
+        <h1><strong>아부지</strong></h1>
+        <p style="font-size: 16px">1966.02.20</p>
+    </div>
+    <div class="card">
+        <i class = "fab fa-css3-alt"></i>
+        <img src="/static/images/지영.jpg" alt="지영"  width="150" height="150">
+        <h1><strong>첫째 딸</strong></h1>
+        <p style="font-size: 16px">2000.07.19</p>
+    </div>
+    <div class="card">
+        <i class = "fab fa-css3-alt"></i>
+        <img src="/static/images/서영.jpg" alt="서영"  width="150" height="150">
+        <h1><strong>둘째 딸</strong></h1>
+        <p style="font-size: 16px">2004.01.08</p>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="left">
+            <h1>허지영 제작</h1>
+            <div class="sns">
+                <i class="fab fa-gitgub"></i>
+            </div>
+        </div>
+        <div class="right">
+            <div class="list">
+                <h2>CONTECT</h2>
+                <ul>
+                    <li>번호 : 010-8210-9951</li>
+                    <li>깃 링크 : <a href="https://github.com/jiyoungmerong" target="_blank">https://github.com/jiyoungmerong</a></li>
+                    <li>블로그 : <a href="https://jiyoungmerong.tistory.com" target="_blank">https://jiyoungmerong.tistory.com</a></li>
+                </ul>
+            </div>
+            <div class="list">
+                <h2>ABOUT</h2>
+                <ul>
+                    <li>프론트 허지영</li>
+                    <li>백엔드 허지영</li>
+                    <li>DB 허지영</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copy_right">
+        <p>© jiyoungmerong</p>
+    </div>
+</footer>
+</footer>
+</body>
+</html>
