@@ -4,6 +4,8 @@ import com.barcode.solution_challenge_7_back.domain.BarCode;
 import com.barcode.solution_challenge_7_back.domain.dto.BarcodeDto;
 import com.barcode.solution_challenge_7_back.exception.BarcodeNotFoundException;
 import com.barcode.solution_challenge_7_back.service.BarcodeService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import java.util.Optional;
 public class BarcodeController {
     private final BarcodeService barcodeService;
 
+    @ApiOperation(value = "바코드 번호 찾기", notes = "바코드 번호로 데이터베이스에 저장되어 있는 바코드를 가져옵니다.")
+    @ApiImplicitParam(name = "barcodeNumber", value = "데이터베이스에 저장되어 있는 바코드 번호")
     @GetMapping("barcode/{barcodeNumber}")
     public BarcodeDto getBarcodeInfo(@PathVariable String barcodeNumber) {
         if(barcodeNumber == null){
@@ -25,6 +29,10 @@ public class BarcodeController {
     }
 
 
+
+
+    @ApiOperation(value = "분리수거 방법", notes = "메인뷰에서 물질에 따른 분리수거 방법을 찾아오는 코드입니다.")
+    @ApiImplicitParam(name = "barcodeNumber", value = "데이터베이스에 저장되어 있는 바코드 번호")
     @GetMapping("/recycle/{material}")
     public ResponseEntity<String> getRecyclingInfo(@PathVariable String material){
         String recyclingInfo = null; // 분리수거 방법
