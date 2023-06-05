@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface BarcodeRepository extends JpaRepository<BarCode, Integer> {
     Optional<BarCode> findByBarcodeNumber(String barcodeNumber);
 
-
 }
