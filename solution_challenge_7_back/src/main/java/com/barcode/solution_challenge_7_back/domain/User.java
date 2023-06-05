@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name="User")
-public class User extends BaseTimeEntity {
+public class User {
     @Id
     @Column(name="user_id", unique = true)
     private String id; // 아이디
