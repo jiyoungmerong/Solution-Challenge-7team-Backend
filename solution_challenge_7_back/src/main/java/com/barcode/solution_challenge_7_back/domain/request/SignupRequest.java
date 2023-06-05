@@ -5,12 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SignupRequest { // 회원가입 요청
-
     private String id;
 
     private String password;
