@@ -1,6 +1,7 @@
 package com.barcode.solution_challenge_7_back.service;
 
 import com.barcode.solution_challenge_7_back.domain.User;
+import com.barcode.solution_challenge_7_back.domain.dto.UserDto;
 import com.barcode.solution_challenge_7_back.domain.request.SignupRequest;
 import com.barcode.solution_challenge_7_back.domain.response.SignupResponse;
 import com.barcode.solution_challenge_7_back.repository.UserRepository;
@@ -19,17 +20,15 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public SignupResponse create(SignupRequest request){
+    public void save(UserDto userDto){
         User user = User.builder()
-                .id(request.getId())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .nickname(request.getNickname())
-                .date(request.getDate())
+                .id(userDto.getId())
+                .password(passwordEncoder.encode(userDto.getPassword()))
+                .nickname(userDto.getNickname())
+                .date(userDto.getDate())
                 .build();
 
         userRepository.save(user);
-
-        return SignupResponse.of(request.getId(), request.getNickname(), request.getDate());
     }
 
 
