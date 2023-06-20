@@ -1,9 +1,13 @@
 package com.barcode.solution_challenge_7_back.controller;
 
 import com.barcode.solution_challenge_7_back.domain.BarCode;
+import com.barcode.solution_challenge_7_back.domain.dto.ApiResponseDto;
 import com.barcode.solution_challenge_7_back.domain.dto.BarcodeDto;
+import com.barcode.solution_challenge_7_back.domain.response.BarcodeNumberResponse;
 import com.barcode.solution_challenge_7_back.exception.BarcodeNotFoundException;
 import com.barcode.solution_challenge_7_back.service.BarcodeService;
+import com.barcode.solution_challenge_7_back.status.ErrorStatus;
+import com.barcode.solution_challenge_7_back.status.SuccessStatus;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -18,18 +22,25 @@ import java.util.Optional;
 public class BarcodeController {
     private final BarcodeService barcodeService;
 
+//    @ApiOperation(value = "바코드 번호 찾기", notes = "바코드 번호로 데이터베이스에 저장되어 있는 바코드를 가져옵니다.")
+//    @ApiImplicitParam(name = "barcodeNumber", value = "데이터베이스에 저장되어 있는 바코드 번호")
+//    @GetMapping("barcode/{barcodeNumber}")
+//    public BarcodeDto getBarcodeInfo(@PathVariable String barcodeNumber) {
+//        if(barcodeNumber == null){
+//            throw new BarcodeNotFoundException("바코드 번호를 찾을 수 없습니다.");
+//        }
+//        return barcodeService.getProductInfoByBarcode(barcodeNumber);
+//    }
+
     @ApiOperation(value = "바코드 번호 찾기", notes = "바코드 번호로 데이터베이스에 저장되어 있는 바코드를 가져옵니다.")
     @ApiImplicitParam(name = "barcodeNumber", value = "데이터베이스에 저장되어 있는 바코드 번호")
     @GetMapping("barcode/{barcodeNumber}")
-    public BarcodeDto getBarcodeInfo(@PathVariable String barcodeNumber) {
+    public ApiResponseDto<BarcodeNumberResponse> getBarcodeInfo(@PathVariable String barcodeNumber) {
         if(barcodeNumber == null){
-            throw new BarcodeNotFoundException("바코드 번호를 찾을 수 없습니다.");
+            return ApiResponseDto.error(ErrorStatus.BARCODE_NOT_FOUND);
         }
-        return barcodeService.getProductInfoByBarcode(barcodeNumber);
+        return ApiResponseDto.success(SuccessStatus.BRING_BARCODE_DATE_SUCCESS, barcodeService.getProductInfoByBarcode(barcodeNumber));
     }
-
-
-
 
     @ApiOperation(value = "분리수거 방법", notes = "메인뷰에서 물질에 따른 분리수거 방법을 찾아오는 코드입니다.")
     @ApiImplicitParam(name = "barcodeNumber", value = "데이터베이스에 저장되어 있는 바코드 번호")
