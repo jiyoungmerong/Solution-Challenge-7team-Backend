@@ -4,6 +4,7 @@ import com.barcode.solution_challenge_7_back.domain.User;
 import com.barcode.solution_challenge_7_back.domain.dto.ApiResponseDto;
 import com.barcode.solution_challenge_7_back.domain.dto.UserDto;
 import com.barcode.solution_challenge_7_back.domain.request.LoginRequest;
+import com.barcode.solution_challenge_7_back.domain.response.DateResponse;
 import com.barcode.solution_challenge_7_back.domain.response.LoginResponse;
 import com.barcode.solution_challenge_7_back.domain.response.SignupResponse;
 import com.barcode.solution_challenge_7_back.repository.UserRepository;
@@ -58,53 +59,52 @@ public class UserController {
         return isAuthenticated ? ApiResponseDto.success(SuccessStatus.LOGIN_SUCCESS, LoginResponse.of(request.getId())) : ApiResponseDto.error(ErrorStatus.USER_CERTIFICATION_FAILED);
     }
 
-//    @ApiOperation(value = "아이디 중복 확인", notes = "해당 id가 이미 존재한다면 true, 존재하지 않다면 false를 반환합니다.")
-//    @ApiImplicitParam(name = "id", value = "사용자가 생성한 id")
-//    @GetMapping("/checkDuplicateId/{id}") // 아이디 중복 확인
-//    public boolean checkDuplicateId(@PathVariable String id) {
-//        return userService.checkDuplicateId(id);
-//    }
-
     @ApiOperation(value = "아이디 중복 확인", notes = "해당 id가 이미 존재한다면 true, 존재하지 않다면 false를 반환합니다.")
     @ApiImplicitParam(name = "id", value = "사용자가 생성한 id")
     @GetMapping("/checkDuplicateId/{id}") // 아이디 중복 확인
     public ApiResponseDto<String> checkDuplicateId(@PathVariable String id) {
         boolean isDuplicateId = userService.checkDuplicateId(id);
-        return isDuplicateId ? ApiResponseDto.success(SuccessStatus.CREATE_ID_SUCCESS) : ApiResponseDto.error(ErrorStatus.CONFLICT_ID_EXCEPTION);
+        return isDuplicateId ? ApiResponseDto.success(SuccessStatus.CREATE_ID_SUCCESS, id) : ApiResponseDto.error(ErrorStatus.CONFLICT_ID_EXCEPTION);
     }
-
-//    @ApiOperation(value = "닉네임 중복 확인", notes = "해당 닉네임이 이미 존재한다면 true, 존재하지 않다면 false를 반환합니다.")
-//    @ApiImplicitParam(name = "nickname", value = "사용자가 생성한 닉네임")
-//    @GetMapping("/checkDuplicateNickname/{nickname}")
-//    public boolean checkDuplicateNickname(@PathVariable String nickname) {
-//        return userService.checkDuplicateNickname(nickname);
-//    }
 
     @ApiOperation(value = "닉네임 중복 확인", notes = "해당 닉네임이 이미 존재한다면 true, 존재하지 않다면 false를 반환합니다.")
     @ApiImplicitParam(name = "nickname", value = "사용자가 생성한 닉네임")
     @GetMapping("/checkDuplicateNickname/{nickname}")
     public ApiResponseDto<String> checkDuplicateNickname(@PathVariable String nickname) {
         boolean isDuplicateNickname = userService.checkDuplicateNickname(nickname);
-        return isDuplicateNickname ? ApiResponseDto.success(SuccessStatus.CREATE_NICKNAME_SUCCESS) : ApiResponseDto.error(ErrorStatus.CONFLICT_NICKNAME_EXCEPTION);
+        return isDuplicateNickname ? ApiResponseDto.success(SuccessStatus.CREATE_NICKNAME_SUCCESS, nickname) : ApiResponseDto.error(ErrorStatus.CONFLICT_NICKNAME_EXCEPTION);
     }
+
+//    @ApiOperation(value = "유저 날짜 가져오기", notes = "회원가입할 때 저장한 날짜를 가져옵니다.")
+//    @ApiImplicitParam(name = "userId", value = "사용자의 userId")
+//    @GetMapping("/user/{userId}/day")
+//    public ResponseEntity<String> getUserCustomDay(@PathVariable String userId) {
+//        Optional<User> optionalUser = userRepository.findById(userId);
+//        if (optionalUser.isPresent()) {
+//            User user = optionalUser.get();
+//            String date = user.getDate();
+//            if (date != null && !date.isEmpty()) {
+//                return ResponseEntity.ok(date);
+//            } else {
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                        .body("Custom day not found for user " + userId);
+//            }
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                    .body("User not found with id " + userId);
+//        }
+//    }
 
     @ApiOperation(value = "유저 날짜 가져오기", notes = "회원가입할 때 저장한 날짜를 가져옵니다.")
     @ApiImplicitParam(name = "userId", value = "사용자의 userId")
     @GetMapping("/user/{userId}/day")
-    public ResponseEntity<String> getUserCustomDay(@PathVariable String userId) {
+    public ApiResponseDto<DateResponse> getUserCustomDay(@PathVariable String userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            String date = user.getDate();
-            if (date != null && !date.isEmpty()) {
-                return ResponseEntity.ok(date);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("Custom day not found for user " + userId);
-            }
+            return ApiResponseDto.success(SuccessStatus.BRING_DATE_SUCCESS, DateResponse.of(user.getDate()));
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("User not found with id " + userId);
+            return ApiResponseDto.error(ErrorStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
