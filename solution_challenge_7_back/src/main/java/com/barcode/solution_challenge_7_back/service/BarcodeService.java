@@ -1,8 +1,7 @@
 package com.barcode.solution_challenge_7_back.service;
 
 import com.barcode.solution_challenge_7_back.domain.BarCode;
-import com.barcode.solution_challenge_7_back.domain.dto.BarcodeDto;
-import com.barcode.solution_challenge_7_back.exception.BarcodeNotFoundException;
+import com.barcode.solution_challenge_7_back.domain.response.BarcodeNumberResponse;
 import com.barcode.solution_challenge_7_back.repository.BarcodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,11 +15,10 @@ import java.util.Optional;
 public class BarcodeService {
     private final BarcodeRepository barcodeRepository;
 
-    public BarcodeDto getProductInfoByBarcode(String barcodeNumber){
+    public BarcodeNumberResponse getProductInfoByBarcode(String barcodeNumber){
         BarCode barCode = barcodeRepository.findByBarcodeNumber(barcodeNumber)
-                .orElseThrow(() -> new BarcodeNotFoundException(barcodeNumber));
-        return new BarcodeDto(barCode.getGoods_name(), barCode.getHow(), barCode.getMethod());
+                .orElse(null);
+
+        return BarcodeNumberResponse.from(barCode.getGoods_name(), barCode.getHow(), barCode.getMethod());
     }
-
-
 }
