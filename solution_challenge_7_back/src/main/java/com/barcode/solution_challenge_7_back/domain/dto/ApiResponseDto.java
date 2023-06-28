@@ -1,6 +1,4 @@
 package com.barcode.solution_challenge_7_back.domain.dto;
-
-
 import com.barcode.solution_challenge_7_back.status.ErrorStatus;
 import com.barcode.solution_challenge_7_back.status.SuccessStatus;
 import lombok.AccessLevel;
@@ -29,4 +27,7 @@ public class ApiResponseDto<T> {
         return new ApiResponseDto<>(errorStatus.getHttpStatus().value(), errorStatus.getMessage());
     }
 
+    public static <T> ApiResponseDto<T> error(ErrorStatus errorStatus, T data) {
+        return new ApiResponseDto<T>(errorStatus.getHttpStatus().value(), errorStatus.getMessage(), data);
+    }
 }
