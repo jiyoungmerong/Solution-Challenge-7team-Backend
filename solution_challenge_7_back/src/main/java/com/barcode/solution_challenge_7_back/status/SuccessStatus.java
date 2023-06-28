@@ -17,9 +17,13 @@ public enum SuccessStatus {
 
     LOGIN_SUCCESS(HttpStatus.OK, "로그인 성공!"),
 
+    BRING_RECYCLE_METHOD_SUCCESS(HttpStatus.OK, "분리수거 방법 가져오기 성공!"),
+
     CERTIFICATION_SUCCESS(HttpStatus.OK, "유저 인증 성공"),
 
-    BRING_DATE_SUCCESS(HttpStatus.OK, "사용자 지정 요일 가져오기 성공")
+    BRING_DATE_SUCCESS(HttpStatus.OK, "사용자 지정 요일 가져오기 성공"),
+
+    BRING_BARCODE_DATE_SUCCESS(HttpStatus.OK, "바코드 가져오기 성공"),
     ;
 
     private final HttpStatus httpStatus;
