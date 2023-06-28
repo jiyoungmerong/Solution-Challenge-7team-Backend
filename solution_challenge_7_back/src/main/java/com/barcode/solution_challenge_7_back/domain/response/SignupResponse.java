@@ -7,12 +7,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SignupResponse {
-
     private String userId;
     private String nickname;
     private String date;
 
-    public static SignupResponse of(String userId, String nickname, String date) {
+    public static SignupResponse from(String userId, String nickname, String date) {
         return new SignupResponse(userId, nickname, date);
     }
 }

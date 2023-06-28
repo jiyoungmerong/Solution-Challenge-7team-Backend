@@ -4,6 +4,7 @@ import com.barcode.solution_challenge_7_back.domain.User;
 import com.barcode.solution_challenge_7_back.domain.dto.ApiResponseDto;
 import com.barcode.solution_challenge_7_back.domain.dto.UserDto;
 import com.barcode.solution_challenge_7_back.domain.request.LoginRequest;
+import com.barcode.solution_challenge_7_back.domain.request.SignupRequest;
 import com.barcode.solution_challenge_7_back.domain.response.DateResponse;
 import com.barcode.solution_challenge_7_back.domain.response.LoginResponse;
 import com.barcode.solution_challenge_7_back.domain.response.SignupResponse;
@@ -31,9 +32,9 @@ public class UserController {
             @io.swagger.annotations.ApiResponse(code = 500, message = "서버 오류")
     })
     @PostMapping("/users/new-user") // 회원가입
-    public ApiResponseDto<SignupResponse> join(@RequestBody UserDto userDto) {
+    public ApiResponseDto<SignupResponse> join(@RequestBody SignupRequest request) {
         try {
-            return ApiResponseDto.success(SuccessStatus.SIGNUP_SUCCESS, userService.save(userDto)); // 회원가입 성공
+            return ApiResponseDto.success(SuccessStatus.SIGNUP_SUCCESS, userService.save(request)); // 회원가입 성공
         } catch (Exception e) { // 그 밖의 예외 발생시
             return ApiResponseDto.error(ErrorStatus.INTERNAL_SERVER_ERROR);
         }

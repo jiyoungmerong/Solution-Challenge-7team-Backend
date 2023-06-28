@@ -20,29 +20,18 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public SignupResponse save(UserDto userDto){
+    public SignupResponse save(SignupRequest request){
         User user = User.builder()
-                .id(userDto.getId())
-                .password(passwordEncoder.encode(userDto.getPassword()))
-                .nickname(userDto.getNickname())
-                .date(userDto.getDate())
+                .id(request.getId())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .nickname(request.getNickname())
+                .date(request.getDate())
                 .build();
 
         userRepository.save(user);
 
         return SignupResponse.from(user.getId(), user.getNickname(), user.getDate());
     }
-
-//
-//    public String login(String id, String password){ // 로그인
-//        Optional<User> user = userRepository.findById(id);
-//        if(user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())){
-//            return "true";
-//        }
-//        else{
-//            return "false";
-//        }
-//    }
 
     public boolean checkLogin(String id, String password) {
         Optional<User> user = userRepository.findById(id);
